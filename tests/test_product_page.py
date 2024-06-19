@@ -1,10 +1,17 @@
-from page_objects.product_page import ProductPage
+from page_objects.LoginPage import LoginPage
+from page_objects.AdminPage import AdminPage
+from page_objects.ProductPage import ProductPage
+
+PRODUCT_NAME = "iPAD 18"
 
 
-def test_product_page(browser):
-    browser.get(browser.url + "/product/smartphone/htc-touch-hd")
-    browser.find_element(*ProductPage.HEADER)
-    browser.find_element(*ProductPage.PRODUCT_PRICE)
-    browser.find_element(*ProductPage.NAVIGATION_TAB)
-    browser.find_element(*ProductPage.CART_BUTTON)
-    browser.find_element(*ProductPage.QUANTITY_INPUT)
+def test_product_creation(browser):
+    LoginPage(browser).login_user()
+    AdminPage(browser).open_products_page()
+    ProductPage(browser).create_new_product(PRODUCT_NAME)
+
+
+def test_product_deletion(browser):
+    LoginPage(browser).login_user()
+    AdminPage(browser).open_products_page()
+    ProductPage(browser).delete_product(PRODUCT_NAME)
