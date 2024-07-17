@@ -1,3 +1,4 @@
+import logging
 import os
 
 import pytest
@@ -7,10 +8,13 @@ from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.firefox.options import Options as FFOptions
 
+logging.basicConfig(filename='example.log', level=logging.INFO)
+mylogger = logging.getLogger()
+
 
 def pytest_addoption(parser):
     parser.addoption("--browser", default="chrome", help="Default browser")
-    parser.addoption("--url", default="http://192.168.0.107:8081/", help="Opencart base URL")
+    parser.addoption("--url", default="http://192.168.0.160:8081/", help="Opencart base URL")
     parser.addoption("--headless", action="store_true")
     parser.addoption("--drivers", default=os.path.expanduser("~/Downloads/drivers"), help="Drivers path")
 
